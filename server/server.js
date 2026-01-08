@@ -7,6 +7,14 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+const indexRouter = require('./routes/index');
+const lostItemsRouter = require('./routes/lost-items');
+const userRouter = require('./routes/users');
+
+app.use('/', indexRouter);
+app.use('/lost-items', lostItemsRouter);
+app.use('/user', userRouter);
+
 app.get("/api", (req, res) =>{
     res.json({lostInfo:["lost items", "poster"]});
 });
