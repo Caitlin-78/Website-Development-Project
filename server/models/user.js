@@ -11,17 +11,27 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        min: 8
     },
     school: {
         type: String
     },
     grade: {
         type: Number
+    },
+    bio: {
+        type: String,
+        max: 200
+    },
+    role: {
+        type: String,
+        default: "user"
     }
 })
 

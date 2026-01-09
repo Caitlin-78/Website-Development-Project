@@ -40,6 +40,9 @@ const lostItemSchema = new mongoose.Schema({
         type: String,
         required: true,
         //default: User.email
+    },
+    claimedBy: {
+        type: String
     }
 
 })
