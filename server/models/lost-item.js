@@ -35,6 +35,11 @@ const lostItemSchema = new mongoose.Schema({
     currentLocation: { //which school's lost & found the item's currently in
         type: String,
         required: true
+    },
+    postedBy: {
+        type: String,
+        required: true,
+        //default: User.email
     }
 
 })
