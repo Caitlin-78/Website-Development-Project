@@ -8,6 +8,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use(express.json());
 // To connect routers
 const indexRouter = require('./routes/index');
 const lostItemsRouter = require('./routes/lost-items');

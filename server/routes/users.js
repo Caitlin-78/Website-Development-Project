@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express();
-const User = require(".models/user");
+const User = require("../models/user");
 //will render sign-on page
 router.get('/', (req, res) => {
     res.send("Hello world");
