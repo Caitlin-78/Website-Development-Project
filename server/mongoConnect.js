@@ -16,12 +16,15 @@ if (process.env.DATABASE_URI) {
 let database;
 
 module.exports = {
-    connectToServer: () => {
+    getDb: () => {
         database = client.db("ucvts-lost-and-found");
+        return database;
     },
+    /*
     getDb: () => {
         return database;
     }
+    */
 }
 
 

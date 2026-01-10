@@ -9,7 +9,7 @@ const lostItemSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    imgName: {
+    imgFileName: {
         type: String,
         required: true
     },

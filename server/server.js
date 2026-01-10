@@ -19,10 +19,7 @@ app.use('/', indexRouter);
 app.use('/lost-items', lostItemsRouter);
 app.use('/user', userRouter);
 
-// console.log(process.env.DATABASE_URI); --> for debugging
-
-//mongodb configuration (this took forever holy-)
-/*
+/* alternate way of connecting to MongoDB (do this only if absolutely needed)
 const mongoose = require("mongoose");
 mongoose.connect(process.env.DATABASE_URI);
 const db = mongoose.connection;
