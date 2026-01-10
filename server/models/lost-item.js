@@ -37,8 +37,8 @@ const lostItemSchema = new mongoose.Schema({
         required: true
     },
     postedBy: {
-        type: String,
-        required: true,
+        type: String
+        //required: true,
         //default: User.email
     },
     claimedBy: {
