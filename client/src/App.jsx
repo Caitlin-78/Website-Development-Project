@@ -4,6 +4,7 @@ import axios from 'axios'
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
 //page imports
+import { Landing } from './pages/landing'
 import { Home } from './pages/homepage'
 import { AboutUs } from './pages/about-us'
 import { Admin } from './pages/admin-page'
@@ -16,15 +17,21 @@ import { Profile } from './pages/profile-page'
 import { Map } from './pages/school-map'
 import { SignIn } from './pages/sign-in'
 import { ViewItem } from './pages/view-specific-item'
-
+import { Navbar } from './components/Navbar'
+import { Layout } from './components/Layout'
 
 
 
 function App() {
   const [count, setCount] = useState(0)
+  const [data, setData] = useState()
+
 
   const fetchAPI = async () => {
     const response = await axios.get("http://localhost:8080/api");
+    if (response.status === 200) {
+      setData(response.data)
+    }
   };
 
   useEffect(()=>{
@@ -32,22 +39,30 @@ function App() {
     },[]);
 
   return (
+    /* <> --> for testing purposes only, delete before final submission
+      {JSON.stringify(data)}
+    </>
+    */
     <Router>
       <Routes>
-        <Route path="/" element={<Home/>}/>
+        <Route path="/" element={<Landing/>}/>
+        <Route element={<Layout/>}>
+          <Route path="/home" element={<Home/>}/>
+          <Route path="/about-us" element={<AboutUs/>}/>
+          <Route path="/faq" element={<FAQ/>}/>
+          <Route path="/submit-item" element={<SubmitLostItem/>}/>
+          <Route path="/lost-and-found" element={<LostAndFound/>}/>
+          <Route path="/profile/" element={<Profile/>}/>
+          <Route path="/map" element={<Map/>}/>
+          <Route path="/view-item/" element={<ViewItem/>}/>
+          <Route path="/admin" element={<Admin/>}/>
+        </Route>
         <Route path="/create-account" element={<CreateAccount/>}/>
-        <Route path="/about-us" element={<AboutUs/>}/>
-        <Route path="/admin" element={<Admin/>}/>
-        <Route path="/faq" element={<FAQ/>}/>
         <Route path="/forgot-password" element={<ForgotPassword/>}/>
-        <Route path="/submit-item" element={<SubmitLostItem/>}/>
-        <Route path="/lost-and-found" element={<LostAndFound/>}/>
-        <Route path="/profile" element={<Profile/>}/>
-        <Route path="/map" element={<Map/>}/>
         <Route path="/login" element={<SignIn/>}/>
-        <Route path="/view-item" element={<ViewItem/>}/>
       </Routes>
     </Router>
+    
   )
 }
 

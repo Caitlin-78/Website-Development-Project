@@ -40,3 +40,15 @@
 .read-the-docs {
   color: #888;
 }
+
+.navbar {
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navItem {
+  padding: 4px;
+  margin: 4px;
+}

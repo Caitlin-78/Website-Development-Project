@@ -16,6 +16,19 @@ router.get('/', async (req, res) => {
     //res.send("Hello world");
 })
 
+//Retrieves all admin-approved items in lostItems collection
+router.get('/admin-approved', async (req, res) => {
+    let db = await database.getDb();
+    //console.log(db);
+    let lostItemData = await db.collection("lostItem").find({ "adminApproved": true }).toArray();
+    if (lostItemData.length > 0) {
+        res.json(lostItemData); //sends retreived data to frontend
+    } else {
+        throw new Error("Data not found or returned as an array correctly"); //will be changed once we start getting ready to deploy our website
+    }
+    //res.send("Hello world");
+})
+
 //Retrieve a specific item in lostItems collection
 router.get('/:id', async (req, res) => {
     let db = await database.getDb();
@@ -41,7 +54,8 @@ router.post('/', async (req, res) => {
         schoolFoundIn: req.body.schoolFoundIn,
         currentLocation: req.body.currentLocation,
         postedBy: req.body.postedBy,
-        claimedBy: "N/A"
+        claimedBy: "N/A",
+        adminApproved: "false",
     }
     let lostItemData = await db.collection("lostItem").insertOne(newItem);
     res.json(lostItemData);
@@ -61,7 +75,8 @@ router.put('/:id', async (req, res) => {
             schoolFoundIn: req.body.schoolFoundIn,
             currentLocation: req.body.currentLocation,
             postedBy: req.body.postedBy, //set to ID of user who posted item
-            claimedBy: req.body.claimedBy || "N/A"
+            claimedBy: req.body.claimedBy || "N/A",
+            adminApproved: req.body.adminApproved
         }
     }
     let lostItemData = await db.collection("lostItem").insertOne({ _id: new ObjectId(req.params.id) }, newItem);
