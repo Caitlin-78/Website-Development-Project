@@ -22,16 +22,18 @@ export function Home() {
             </div>
             <div>
                 <h2>Recently Lost</h2>
+                <div className="homepageRecentlyLost">
                 {items.map((item) => {
-                    return (
-                        <div>
-                            <h3>{item.name}</h3>
-                            <p><b>Date Found: </b>{item.dateUploaded}</p>
-                            <p><b>Location Found: </b>{item.schoolFoundIn}</p>
-                            <p><b>Found By: </b>{item.postedBy}</p>
-                        </div>
-                    )
-                })}
+                        return (
+                            <div className="item">
+                                <h3>{item.name}</h3>
+                                <p><b>Date Found: </b>{item.dateUploaded}</p>
+                                <p><b>Location Found: </b>{item.schoolFoundIn}</p>
+                                <p><b>Found By: </b>{item.postedBy}</p>
+                            </div>
+                        )
+                    })}
+                </div>
                 <button>See all</button>
             </div>
             <div>
