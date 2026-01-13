@@ -9,7 +9,11 @@ const lostItemSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    imgFileName: {
+    imageFile: {
+        type: Buffer,
+        required: true
+    },
+    imageType: {
         type: String,
         required: true
     },
@@ -45,6 +49,12 @@ const lostItemSchema = new mongoose.Schema({
         type: String
     }
 
+})
+
+lostItemSchema.virtual('imageFilePath').get(function() {
+  if (this.imageFile != null && this.imageType != null) {
+    return `data:${this.imageType};charset=utf-8;base64,${this.imageFile.toString('base64')}`
+  }
 })
 
 

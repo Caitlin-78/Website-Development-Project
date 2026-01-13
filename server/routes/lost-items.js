@@ -46,7 +46,8 @@ router.post('/', async (req, res) => {
     let newItem = {
         name: req.body.name,
         description: req.body.description,
-        imgFileName: req.body.imgFileName,
+        imageFile: req.body.imageFile,
+        imageType: req.body.imageType,
         dateUploaded: req.body.dateUploaded,
         itemType: req.body.itemType,
         color: req.body.color,
@@ -57,6 +58,8 @@ router.post('/', async (req, res) => {
         claimedBy: "N/A",
         adminApproved: "false",
     }
+    saveImage(newItem, req.body.itemImage); 
+
     let lostItemData = await db.collection("lostItem").insertOne(newItem);
     res.json(lostItemData);
 })
@@ -67,7 +70,8 @@ router.put('/:id', async (req, res) => {
         $set: {
             name: req.body.name,
             description: req.body.description,
-            imgFileName: req.body.imgFileName,
+            imageFile: req.body.imageFile,
+            imageType: req.body.imageType,
             dateUploaded: Date.now,
             itemType: req.body.itemType,
             color: req.body.color,
@@ -92,5 +96,15 @@ router.delete('/:id', async (req, res) => {
         throw new Error("Data not found or returned as an array correctly"); //will be changed once we start getting ready to deploy our website
     }
 })
+
+function saveItemImage(item, itemImageEncoded) {
+  if (itemImageEncoded == null) return
+  const itemImage = JSON.parse(itemImageEncoded)
+  if (itemImage != null && imageMimeTypes.includes(itemImage.type)) {
+    item.itemImage = new Buffer.from(itemImage.data, 'base64')
+    item.itemImageType = itemImage.type
+  }
+}
+
 
 module.exports = router; //App will break if this line is removed
