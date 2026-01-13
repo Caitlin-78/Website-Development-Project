@@ -52,9 +52,9 @@ function App() {
           <Route path="/faq" element={<FAQ/>}/>
           <Route path="/submit-item" element={<SubmitLostItem/>}/>
           <Route path="/lost-and-found" element={<LostAndFound/>}/>
-          <Route path="/profile/" element={<Profile/>}/>
+          <Route path="/profile/:id" element={<Profile/>}/>
           <Route path="/map" element={<Map/>}/>
-          <Route path="/view-item/" element={<ViewItem/>}/>
+          <Route path="/view-item/:id" element={<ViewItem/>}/>
           <Route path="/admin" element={<Admin/>}/>
         </Route>
         <Route path="/create-account" element={<CreateAccount/>}/>

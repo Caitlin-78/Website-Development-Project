@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const input = document.querySelector('input[type="file"]');
 
 // Create a FilePond instance
-const pond =create(input);
+const pond = create(input);
 
 
 

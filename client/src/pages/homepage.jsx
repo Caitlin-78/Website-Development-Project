@@ -1,6 +1,7 @@
 // import { Navbar } from '../components/Navbar'
 import { getApprovedItems } from "../api"
 import { useState, useEffect } from "react"
+import { LostItemCard } from "../components/lostItemCard";
 
 export function Home() {
 
@@ -9,6 +10,7 @@ export function Home() {
     useEffect(() => {
         async function loadAllItems() {
             const itemData = await getApprovedItems();
+            itemData.sort((d1, d2) => new Date(d2.dateUploaded).getTime() - new Date(d1.dateUploaded).getTime());  //Orders items by posting date
             setItems(itemData)
         }
         loadAllItems()
@@ -24,13 +26,12 @@ export function Home() {
                 <h2>Recently Lost</h2>
                 <div className="homepageRecentlyLost">
                 {items.map((item) => {
+                        /*
+                        let date = new Date(item.dateUploaded);
+                        let stringDate = date.toString();
+                        */
                         return (
-                            <div className="item">
-                                <h3>{item.name}</h3>
-                                <p><b>Date Found: </b>{item.dateUploaded}</p>
-                                <p><b>Location Found: </b>{item.schoolFoundIn}</p>
-                                <p><b>Found By: </b>{item.postedBy}</p>
-                            </div>
+                            <LostItemCard item={item}/>
                         )
                     })}
                 </div>

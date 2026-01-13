@@ -52,3 +52,19 @@
   padding: 4px;
   margin: 4px;
 }
+
+.homepageRecentlyLost {
+  display: flex;
+}
+
+.item {
+  background-color: black;
+  margin: 4px;
+  padding: 4px;
+  border-radius: 10px;
+}
+
+.item:hover {
+  transform: scale(1.05);
+  transition: 0.1s;
+}
