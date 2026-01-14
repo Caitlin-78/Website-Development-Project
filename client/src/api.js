@@ -14,6 +14,17 @@ export async function getAllItems() {
     }
 }
 
+export async function getQueriedItems() {
+    const response = await axios.get(`${URL}/lost-items/search`);
+
+    if (response.status === 200) {
+        return response.data;
+    } else {
+        console.log(response.status); //remove if this causes issues, but i don't think it will
+        return
+    }
+}
+
 export async function getApprovedItems() {
     const response = await axios.get(`${URL}/lost-items/admin-approved`);
 

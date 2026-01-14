@@ -16,6 +16,25 @@ router.get('/', async (req, res) => {
     //res.send("Hello world");
 })
 
+//Retrieves all items with names matching patterns user entered in search bar
+router.get('/search', async (req, res) => {
+    let db = await database.getDb();
+    let searchOptions = {};
+    if (req.query.name != null && req.query.name !== "") {
+        searchOptions.name = new RegExp(req.query.name, 'i');
+        let queriedItems = await db.collection("lostItem").find({searchOptions, "adminApproved": true}).toArray();
+        if (queriedItems.length > 0) {
+            res.json(queriedItems); //sends retreived data to frontend
+        } else {
+            throw new Error("Data not found or returned as an array correctly"); //will be changed once we start getting ready to deploy our website
+        }
+    } else {
+        let queriedItems = await db.collection("lostItem").find({ "adminApproved": true }).toArray();
+        res.json(queriedItems)
+    }
+    //res.send("Hello world");
+})
+
 //Retrieves all admin-approved items in lostItems collection
 router.get('/admin-approved', async (req, res) => {
     let db = await database.getDb();
