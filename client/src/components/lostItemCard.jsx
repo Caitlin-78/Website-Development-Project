@@ -7,7 +7,7 @@ export function LostItemCard({item}) {
 
         return (
             <Link to={`/view-item/${item._id}`} className="item">
-                <h3>{item.name}</h3>
+                <h3>{item.itemName}</h3>
                 <p><b>Date Found: </b>{stringDate.substring(4,15)}</p>
                 <p><b>Location Found: </b>{item.schoolFoundIn}</p>
                 <p><b>Found By: </b>{item.postedBy}</p>

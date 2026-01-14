@@ -143,3 +143,13 @@ export async function deleteSpecificUser(id) {
     */
     return response;
 }
+
+export async function verifyUser(user) {
+    const response = await axios.post(`${URL}/user/login`, user)
+    console.log(response)
+    if (response.data.success) {
+        return response.data.token;
+    } else {
+        alert(response.statusText)
+    }
+}

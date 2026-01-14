@@ -23,7 +23,7 @@ export function ViewItem() {
 
     return (
         <>
-            <h1>{item.name}</h1>
+            <h1>{item.itemName}</h1>
             <div id="dateUploadedBox">
                 <h3>Date Uploaded:</h3>
                 <p>{item.dateUploaded?.substring(4,15)}</p>

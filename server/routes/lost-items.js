@@ -44,21 +44,21 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     let db = await database.getDb();
     let newItem = {
-        name: req.body.name,
+        itemName: req.body.itemName,
         description: req.body.description,
-        imageFile: req.body.imageFile,
-        imageType: req.body.imageType,
+        imgFileName: req.body.imgFileName,
+        //imageType: req.body.imageType,
         dateUploaded: req.body.dateUploaded,
         itemType: req.body.itemType,
         color: req.body.color,
-        brand: req.body.color,
+        brand: req.body.brand,
         schoolFoundIn: req.body.schoolFoundIn,
         currentLocation: req.body.currentLocation,
         postedBy: req.body.postedBy,
-        claimedBy: "N/A",
-        adminApproved: "false",
+        claimedBy: req.body.claimedBy,
+        adminApproved: req.body.adminApproved,
     }
-    saveImage(newItem, req.body.itemImage); 
+    //saveImage(newItem, req.body.imgFileName); 
 
     let lostItemData = await db.collection("lostItem").insertOne(newItem);
     res.json(lostItemData);
@@ -68,7 +68,7 @@ router.put('/:id', async (req, res) => {
     let db = await database.getDb();
     let newItem = {
         $set: {
-            name: req.body.name,
+            itemName: req.body.name,
             description: req.body.description,
             imageFile: req.body.imageFile,
             imageType: req.body.imageType,
@@ -79,7 +79,7 @@ router.put('/:id', async (req, res) => {
             schoolFoundIn: req.body.schoolFoundIn,
             currentLocation: req.body.currentLocation,
             postedBy: req.body.postedBy, //set to ID of user who posted item
-            claimedBy: req.body.claimedBy || "N/A",
+            claimedBy: req.body.claimedBy,
             adminApproved: req.body.adminApproved
         }
     }

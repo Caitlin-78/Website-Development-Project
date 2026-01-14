@@ -1,3 +1,5 @@
+import { CreateAccount } from "../components/create-account"
+
 export function Landing() {
     return (
         <>

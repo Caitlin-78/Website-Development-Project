@@ -3,19 +3,32 @@ import './App.css'
 import axios from 'axios'
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
+//imports for filepond stuff
+
+import { FilePond, registerPlugin } from 'react-filepond';
+
+import 'filepond/dist/filepond.min.css';
+
+import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+
+registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
+
+
 //page imports
 import { Landing } from './pages/landing'
 import { Home } from './pages/homepage'
 import { AboutUs } from './pages/about-us'
 import { Admin } from './pages/admin-page'
-import { CreateAccount } from './pages/create-account'
+import { CreateAccount } from './components/create-account'
 import { FAQ } from './pages/faq-page'
 import { ForgotPassword } from './pages/forgot-password-page'
 import { SubmitLostItem } from './pages/lost-and-found-submission-form'
 import { LostAndFound } from './pages/lost-and-found'
 import { Profile } from './pages/profile-page'
 import { Map } from './pages/school-map'
-import { SignIn } from './pages/sign-in'
+import { SignIn } from './components/sign-in'
 import { ViewItem } from './pages/view-specific-item'
 import { Navbar } from './components/Navbar'
 import { Layout } from './components/Layout'
@@ -37,6 +50,8 @@ function App() {
   useEffect(()=>{
     fetchAPI();
     },[]);
+
+    
 
   return (
     /* <> --> for testing purposes only, delete before final submission
