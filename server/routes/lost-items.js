@@ -87,22 +87,22 @@ router.put('/:id', async (req, res) => {
     let db = await database.getDb();
     let newItem = {
         $set: {
-            itemName: req.body.name,
+            itemName: req.body.itemName,
             description: req.body.description,
-            imageFile: req.body.imageFile,
-            imageType: req.body.imageType,
+            imgFileName: req.body.imgFileName,
+            //imageType: req.body.imageType,
             dateUploaded: Date.now,
             itemType: req.body.itemType,
             color: req.body.color,
-            brand: req.body.color,
+            brand: req.body.brand,
             schoolFoundIn: req.body.schoolFoundIn,
             currentLocation: req.body.currentLocation,
-            postedBy: req.body.postedBy, //set to ID of user who posted item
+            postedBy: req.body.postedBy, //set to the value of the user who found the item
             claimedBy: req.body.claimedBy,
-            adminApproved: req.body.adminApproved
+            adminApproved: req.body.adminApproved,
         }
     }
-    let lostItemData = await db.collection("lostItem").insertOne({ _id: new ObjectId(req.params.id) }, newItem);
+    let lostItemData = await db.collection("lostItem").updateOne({ _id: new ObjectId(req.params.id) }, newItem);
     res.json(lostItemData);
 })
 //Delete a specific item in lostItems collection

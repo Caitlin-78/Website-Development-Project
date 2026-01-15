@@ -1,4 +1,4 @@
-import { getSpecificItem } from "../api"
+import { getSpecificItem, updateItem } from "../api"
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 
@@ -19,7 +19,24 @@ export function ViewItem() {
         loadItem();
     }, [])
 
+    async function handleSubmit() {
+        let submitObject = {
+            itemName: item.itemName,
+            description: item.description,
+            imgFileName: item.imgFileName,
+            dateUploaded: item.dateUploaded,
+            itemType: item.itemType,
+            color: item.color,
+            brand: item.brand,
+            schoolFoundIn: item.schoolFoundIn,
+            currentLocation: item.currentLocation, 
+            postedBy: item.postedBy,
+            claimedBy: "tempUser",
+            adminApproved: item.adminApproved
+        }
 
+        await updateItem(submitObject, id)
+    }
 
     return (
         <>
@@ -48,7 +65,17 @@ export function ViewItem() {
                 <h3>Found by:</h3>
                 <p>{item.postedBy}</p>
             </div>
-            <button>Claim this Item</button>
+            <div>
+                {item.claimedBy !== ("N/A" || null || "N/A") && (
+                    <div>
+                        <h2>This item has already been claimed.</h2>
+                    </div>
+                )}
+            </div>
+
+            <form onSubmit={handleSubmit}>      
+            <button type="submit">Claim this Item</button>
+            </form>
             <button>Request More Info</button>
         </>
     )
