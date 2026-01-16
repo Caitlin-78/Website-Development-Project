@@ -14,7 +14,7 @@ export async function getAllItems() {
     }
 }
 
-export async function getQueriedItems() {
+export async function getQueriedItems(searchName) {
     const response = await axios.get(`${URL}/lost-items/search`);
 
     if (response.status === 200) {

@@ -2,6 +2,8 @@ const express = require("express");
 const router = express();
 const database = require("../mongoConnect");
 const ObjectId = require("mongodb").ObjectId;
+router.use(express.urlencoded({ extended: true }));
+router.use(express.json());
 
 //Retrieve all items in lostItems collection
 router.get('/', async (req, res) => {
@@ -17,7 +19,9 @@ router.get('/', async (req, res) => {
 })
 
 //Retrieves all items with names matching patterns user entered in search bar
-router.get('/search', async (req, res) => {
+router.get("/search/:q", async (req, res) => {
+    /*
+    console.log(req);
     let db = await database.getDb();
     let searchOptions = {};
     if (req.query.name != null && req.query.name !== "") {
@@ -31,8 +35,18 @@ router.get('/search', async (req, res) => {
     } else {
         let queriedItems = await db.collection("lostItem").find({ "adminApproved": true }).toArray();
         res.json(queriedItems)
+    } */
+    let db = await database.getDb();
+    //console.log(req.params.q);
+    const query = req.params.q;
+    console.log(query);
+    //const name = (item) => {item.itemName.toLowerCase().includes(query.toLowerCase())};
+    if (query != null && query !== "") {
+        const results = await db.collection("lostItem").find({"itemName": query}).toArray();
+        res.json(results);
+    } else {
+        res.json([]);
     }
-    //res.send("Hello world");
 })
 
 //Retrieves all admin-approved items in lostItems collection
