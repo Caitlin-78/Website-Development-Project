@@ -9,6 +9,15 @@ export function LostAndFound() {
     const [searchTerm, setSearchTerm] = useState("");
     const [items, setItems] = useState([]);
 
+    useEffect(() => {
+        async function loadAllItems() {
+            const itemData = await getApprovedItems();
+            itemData.sort((d1, d2) => new Date(d2.dateUploaded).getTime() - new Date(d1.dateUploaded).getTime());  //Orders items by posting date
+            setItems(itemData)
+        }
+        loadAllItems()
+    }, [])
+
     const handleSearch = async (e) => {
         setSearchTerm(e.target.value);
         let endpoint = `${URL}/lost-items/admin-approved`
@@ -17,9 +26,10 @@ export function LostAndFound() {
         }
         
         const response = await fetch(endpoint);
-        const data = await response.json();
+        const itemData = await response.json();
+        itemData.sort((d1, d2) => new Date(d2.dateUploaded).getTime() - new Date(d1.dateUploaded).getTime());  //Orders items by posting date
 
-        setItems(data);
+        setItems(itemData);
     }
 
     /*useEffect(() => {
