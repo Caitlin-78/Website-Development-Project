@@ -41,8 +41,9 @@ router.get("/search/:q", async (req, res) => {
     const query = req.params.q;
     console.log(query);
     //const name = (item) => {item.itemName.toLowerCase().includes(query.toLowerCase())};
-    if (query != null && query !== "") {
-        const results = await db.collection("lostItem").find({"itemName": query}).toArray();
+    if (query.length > 0) {
+        //const results = await db.collection("lostItem").find({"itemName": query, "adminApproved": true}).toArray();
+        const results = await db.collection("lostItem").find({"itemName": { $regex: new RegExp(query, 'i') }, "adminApproved": true}).toArray();
         res.json(results);
     } else {
         res.json([]);

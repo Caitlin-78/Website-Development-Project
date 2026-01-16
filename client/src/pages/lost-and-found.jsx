@@ -11,12 +11,15 @@ export function LostAndFound() {
 
     const handleSearch = async (e) => {
         setSearchTerm(e.target.value);
+        let endpoint = `${URL}/lost-items/admin-approved`
         if (e.target.value) {
-            const response = await fetch(`${URL}/lost-items/search/${e.target.value}`);
-            const data = await response.json();
-
-            setItems(data);
+            endpoint = `${URL}/lost-items/search/${e.target.value}`
         }
+        
+        const response = await fetch(endpoint);
+        const data = await response.json();
+
+        setItems(data);
     }
 
     /*useEffect(() => {
