@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createNewItem } from "../api";
+import { Input } from "@/components/ui/input"
 //import ReactDOM from 'react-dom'
 
 import { FilePond, registerPlugin } from 'react-filepond';
@@ -51,16 +52,16 @@ export function SubmitLostItem() {
 
         <>
             <head> <link href="filepond.css" rel="stylesheet" /></head>
-            <h1>Lost Item Submission Page</h1>
+            <h1 className = "barofcolor">Lost Item Submission Page</h1>
             <form onSubmit={handleSubmit}>
                 <h2>Details</h2>
                 <div>
                     <label>Item Image</label>
-                    <input type="file" onChange={(e) => setImage(e.target.value)} name="itemImage" className="filepond" />
+                    <Input type="file" onChange={(e) => setImage(e.target.value)} name="itemImage" className="filepond" />
                 </div>
                 <div>
                     <label>Item Name: </label>
-                    <input name="itemName" onChange={(e) => setName(e.target.value)} maxLength={50} required/>
+                    <Input name="itemName" onChange={(e) => setName(e.target.value)} maxLength={50} required/>
                 </div>
                 <div>
                     <label>Description: </label>
@@ -68,20 +69,20 @@ export function SubmitLostItem() {
                 </div>
                 <div>
                     <label>Building Item was Found In: </label>
-                    <input name="schoolFoundIn" onChange={(e) => setSchoolIn(e.target.value)} required/>
+                    <Input name="schoolFoundIn" onChange={(e) => setSchoolIn(e.target.value)} required/>
                 </div>
                 <div>
                     <label>Current Building Item is In: </label>
-                    <input name="currentLocation" onChange={(e) => setSchoolFound(e.target.value)} required/>
+                    <Input name="currentLocation" onChange={(e) => setSchoolFound(e.target.value)} required/>
                 </div>
                 <h2>Tags</h2>
                 <div>
                     <label>Item Type: </label>
-                    <input name="itemType" onChange={(e) => setItemType(e.target.value)} />
+                    <Input name="itemType" onChange={(e) => setItemType(e.target.value)} />
                     <label>Color: </label>
-                    <input name="color" onChange={(e) => setColor(e.target.value)} />
+                    <Input name="color" onChange={(e) => setColor(e.target.value)} />
                     <label>Brand: </label>
-                    <input name="brand" onChange={(e) => setBrand(e.target.value)} maxLength={25}/>
+                    <Input name="brand" onChange={(e) => setBrand(e.target.value)} maxLength={25}/>
                 </div>
                 <button type="submit">Submit</button>
             </form>

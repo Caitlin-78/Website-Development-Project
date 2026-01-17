@@ -18,29 +18,31 @@ export function Home() {
 
     return (
         <>
-            <div>
-                <h1>UCVTS Lost and Found</h1>
-                <p>oui oui bagel</p>
-            </div>
-            <div>
-                <h2>Recently Lost</h2>
-                <div className="homepageRecentlyLost">
-                {items.map((item) => {
-                        /*
-                        let date = new Date(item.dateUploaded);
-                        let stringDate = date.toString();
-                        */
-                        return (
-                            <LostItemCard item={item}/>
-                        )
-                    })}
+            <body>
+                <div className = "barofcolor">
+                    <h1> UCVTS Lost and Found </h1>
+
                 </div>
-                <button>See all</button>
-            </div>
-            <div>
-                <h2>Getting started?</h2>
-                <p>[Youtube Video embed here]</p>
-            </div>
+                <div>
+                    <h2 style={{backgroundColor: '#11adc5', marginRight: '200px', marginLeft: '200px'}}>Recently Lost</h2>
+                    <div className="homepageRecentlyLost">
+                    {items.map((item) => {
+                            /*
+                            let date = new Date(item.dateUploaded);
+                            let stringDate = date.toString();
+                            */
+                            return (
+                                <LostItemCard item={item}/>
+                            )
+                        })}
+                    </div>
+                    <button>See all</button>
+                </div>
+                <div>
+                    <h2>Getting started?</h2>
+                    <p>[Youtube Video embed here]</p>
+                </div>
+            </body>
         </>
     )
 }

@@ -19,7 +19,7 @@ export function ViewItem() {
         loadItem();
     }, [])
 
-    async function handleSubmit() {
+    async function handleSubmit(item, id) {
         let submitObject = {
             itemName: item.itemName,
             description: item.description,
@@ -76,7 +76,16 @@ export function ViewItem() {
             <form onSubmit={handleSubmit}>      
             <button type="submit">Claim this Item</button>
             </form>
-            <button>Request More Info</button>
+
+            <form>  
+
+
+                 <div>
+                    <label>Ask any questions here: </label>
+                    <textarea name="more info" onChange={(e) => setMoreInfo(e.target.value)} maxLength={250} required/>
+                </div>    
+            <button type="submit">Request More Info Submit</button>
+            </form>
         </>
     )
 }

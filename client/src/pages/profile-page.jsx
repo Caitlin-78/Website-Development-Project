@@ -1,7 +1,7 @@
 export function Profile() {
     return (
         <>
-            <h1>User Profile Page</h1>
+            <h1 className = "barofcolor">User Profile Page</h1>
         </>
     )
 }

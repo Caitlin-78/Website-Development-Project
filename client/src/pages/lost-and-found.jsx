@@ -45,7 +45,7 @@ export function LostAndFound() {
 
     return (
         <>
-            <h1>Lost items catalog page</h1>
+            <h1 className = "barofcolor">Lost items catalog page</h1>
             <input type="text" placeholder="Search for an item..." value={searchTerm} onChange={handleSearch}/>
             <div className="homepageRecentlyLost">
             {items.map((item) => {
