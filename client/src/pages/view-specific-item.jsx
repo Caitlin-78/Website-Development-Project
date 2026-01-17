@@ -78,13 +78,11 @@ export function ViewItem() {
             </form>
 
             <form>  
-
-
                  <div>
                     <label>Ask any questions here: </label>
                     <textarea name="more info" onChange={(e) => setMoreInfo(e.target.value)} maxLength={250} required/>
                 </div>    
-            <button type="submit">Request More Info Submit</button>
+                <button type="submit">Request More Info Submit</button>
             </form>
         </>
     )

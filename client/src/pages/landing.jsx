@@ -1,4 +1,5 @@
 import { CreateAccount } from "../components/create-account"
+import { Link } from "react-router-dom"
 
 export function Landing() {
     return (
@@ -9,12 +10,23 @@ export function Landing() {
             </div>
             <div>
                 <h2>New?</h2>
-                <button>Create Account</button>
+                <Link to={"/create-account"} id="createAccountButton">
+                    <button>Create Account</button>
+                </Link>
             </div>
             <div>
                 <h2>Returning user?</h2>
-                <button>Sign in</button>
+                <Link to={"/login"} id="loginButton">
+                    <button>Sign in</button>
+                </Link>
             </div>
         </>
     )
 }
+/*
+                    <Link to={page.path} className="navItem">
+                        <button>
+                            {page.name}
+                        </button>
+                    </Link>
+                    */

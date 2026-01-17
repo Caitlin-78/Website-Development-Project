@@ -2,6 +2,8 @@
 import { getApprovedItems } from "../api"
 import { useState, useEffect } from "react"
 import { LostItemCard } from "../components/lostItemCard";
+import { Link } from "react-router-dom";
+import { Input } from "@/components/ui/input";
 
 export function Home() {
 
@@ -36,7 +38,9 @@ export function Home() {
                             )
                         })}
                     </div>
-                    <button>See all</button>
+                    <Link to={"/lost-and-found"} id="seeAllButton">
+                        <button>See all</button>
+                    </Link>
                 </div>
                 <div>
                     <h2>Getting started?</h2>
