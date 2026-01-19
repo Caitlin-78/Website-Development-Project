@@ -30,12 +30,18 @@ import { Profile } from './pages/profile-page'
 import { Map } from './pages/school-map'
 import { SignIn } from './components/sign-in'
 import { ViewItem } from './pages/view-specific-item'
-import { Navbar } from './components/Navbar'
 import { Layout } from './components/Layout'
 
 
 
 function App() {
+  useEffect(() => {
+    let token = sessionStorage.getItem("User");
+    if (token) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    }
+  }, [])
+
   const [count, setCount] = useState(0)
   const [data, setData] = useState()
 
@@ -67,7 +73,7 @@ function App() {
           <Route path="/faq" element={<FAQ/>}/>
           <Route path="/submit-item" element={<SubmitLostItem/>}/>
           <Route path="/lost-and-found" element={<LostAndFound/>}/>
-          <Route path="/profile/:id" element={<Profile/>}/>
+          <Route path="/profile" element={<Profile/>}/>
           <Route path="/map" element={<Map/>}/>
           <Route path="/view-item/:id" element={<ViewItem/>}/>
           <Route path="/admin" element={<Admin/>}/>

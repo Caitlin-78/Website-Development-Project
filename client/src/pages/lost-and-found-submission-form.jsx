@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createNewItem } from "../api";
 import { Input } from "@/components/ui/input"
+import { jwtDecode } from "jwt-decode";
 //import ReactDOM from 'react-dom'
 
 import { FilePond, registerPlugin } from 'react-filepond';
@@ -19,6 +20,7 @@ export function SubmitLostItem() {
         console.log('FilePond instance has initialised', this.pond);
     }
     */
+    const [user, setUser] = useState({});
 
     const [image, setImage] = useState("");
     const [lostItemName, setName] = useState("");
@@ -28,6 +30,16 @@ export function SubmitLostItem() {
     const [type, setItemType] = useState("");
     const [itemColor, setColor] = useState("");
     const [itemBrand, setBrand] = useState("");
+
+    useEffect(() => {
+        async function loadUserData() {
+            const token = sessionStorage.getItem("User");
+            const decodedUser = jwtDecode(token);
+            setUser(decodedUser);
+
+        }
+        loadUserData();
+    }, [])
 
     async function handleSubmit() {
         let submitObject = {
@@ -40,7 +52,7 @@ export function SubmitLostItem() {
             brand: itemBrand,
             schoolFoundIn: schoolFound,
             currentLocation: schoolIn, 
-            postedBy: null, //temp value
+            postedBy: user._id, //null --> temp value
             claimedBy: null,
             adminApproved: false
         }
@@ -49,9 +61,8 @@ export function SubmitLostItem() {
     }
 
     return (
-
         <>
-            <head> <link href="filepond.css" rel="stylesheet" /></head>
+            {/* <head> <link href="filepond.css" rel="stylesheet" /></head> */}
             <h1 className = "barofcolor">Lost Item Submission Page</h1>
             <form onSubmit={handleSubmit}>
                 <h2>Details</h2>

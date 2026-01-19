@@ -1,12 +1,15 @@
+require('dotenv').config();
+
 const express = require("express");
 const router = express();
 const database = require("../mongoConnect");
 const ObjectId = require("mongodb").ObjectId;
+const jwt = require("jsonwebtoken");
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
 //Retrieve all items in lostItems collection
-router.get('/', async (req, res) => {
+router.get('/', verifyToken, async (req, res) => {
     let db = await database.getDb();
     //console.log(db);
     let lostItemData = await db.collection("lostItem").find({}).toArray();
@@ -19,23 +22,7 @@ router.get('/', async (req, res) => {
 })
 
 //Retrieves all items with names matching patterns user entered in search bar
-router.get("/search/:q", async (req, res) => {
-    /*
-    console.log(req);
-    let db = await database.getDb();
-    let searchOptions = {};
-    if (req.query.name != null && req.query.name !== "") {
-        searchOptions.name = new RegExp(req.query.name, 'i');
-        let queriedItems = await db.collection("lostItem").find({searchOptions, "adminApproved": true}).toArray();
-        if (queriedItems.length > 0) {
-            res.json(queriedItems); //sends retreived data to frontend
-        } else {
-            throw new Error("Data not found or returned as an array correctly"); //will be changed once we start getting ready to deploy our website
-        }
-    } else {
-        let queriedItems = await db.collection("lostItem").find({ "adminApproved": true }).toArray();
-        res.json(queriedItems)
-    } */
+router.get("/search/:q", verifyToken, async (req, res) => {
     let db = await database.getDb();
     //console.log(req.params.q);
     const query = req.params.q;
@@ -51,7 +38,7 @@ router.get("/search/:q", async (req, res) => {
 })
 
 //Retrieves all admin-approved items in lostItems collection
-router.get('/admin-approved', async (req, res) => {
+router.get('/admin-approved', verifyToken, async (req, res) => {
     let db = await database.getDb();
     //console.log(db);
     let lostItemData = await db.collection("lostItem").find({ "adminApproved": true }).toArray();
@@ -64,7 +51,7 @@ router.get('/admin-approved', async (req, res) => {
 })
 
 //Retrieve a specific item in lostItems collection
-router.get('/:id', async (req, res) => {
+router.get('/:id', verifyToken, async (req, res) => {
     let db = await database.getDb();
     let lostItemData = await db.collection("lostItem").findOne({ _id: new ObjectId(req.params.id)});
     if (Object.keys(lostItemData).length > 0) {
@@ -75,7 +62,7 @@ router.get('/:id', async (req, res) => {
 })
 
 //Create a new object in lostItems collection
-router.post('/', async (req, res) => {
+router.post('/', verifyToken, async (req, res) => {
     let db = await database.getDb();
     let newItem = {
         itemName: req.body.itemName,
@@ -98,7 +85,7 @@ router.post('/', async (req, res) => {
     res.json(lostItemData);
 })
 //Update an existing object in lostItems collection
-router.put('/:id', async (req, res) => {
+router.put('/:id', verifyToken, async (req, res) => {
     let db = await database.getDb();
     let newItem = {
         $set: {
@@ -121,7 +108,7 @@ router.put('/:id', async (req, res) => {
     res.json(lostItemData);
 })
 //Delete a specific item in lostItems collection
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', verifyToken, async (req, res) => {
     let db = await database.getDb();
     let lostItemData = await db.collection("lostItem").deleteOne({ _id: new ObjectId(req.params.id)});
     if (Object.keys(lostItemData).length > 0) {
@@ -138,6 +125,24 @@ function saveItemImage(item, itemImageEncoded) {
     item.itemImage = new Buffer.from(itemImage.data, 'base64')
     item.itemImageType = itemImage.type
   }
+}
+
+function verifyToken(req, res, next) {
+    const authHeaders = req.headers["authorization"];
+    const token = authHeaders && authHeaders.split(' ')[1];
+    if (!token) {
+        return res.status[401].json({message: "Authentication token is missing."});
+    }
+
+    jwt.verify(token, process.env.SECRETKEY, (error, user) => {
+        if (error) {
+            return res.status[403].json({message: "Invalid token."});
+        }
+
+        //req.body.user = user;
+        req.user = user; //(if req.body.user gives an error)
+        next();
+    })
 }
 
 

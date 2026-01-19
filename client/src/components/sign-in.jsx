@@ -1,6 +1,7 @@
 import { verifyUser } from "../api"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export function SignIn() {
     const [userEmail, setEmail] = useState("");
@@ -18,7 +19,8 @@ export function SignIn() {
         //console.log(res);
         if (res) {
             navigate("/home")
-            sessionStorage.setItem("User", res)
+            sessionStorage.setItem("User", res);
+            axios.defaults.headers.common["Authorization"] = `Bearer ${res}`;
         } else {
             alert("Login failed.  Make sure you entered your email and password correctly and with proper casing.")
         }

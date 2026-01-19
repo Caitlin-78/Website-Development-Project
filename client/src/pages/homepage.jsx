@@ -14,13 +14,13 @@ export function Home() {
             const itemData = await getApprovedItems();
             itemData.sort((d1, d2) => new Date(d2.dateUploaded).getTime() - new Date(d1.dateUploaded).getTime());  //Orders items by posting date
             setItems(itemData)
+            console.log(itemData);
         }
         loadAllItems()
     }, [])
 
     return (
         <>
-            <body>
                 <div className = "barofcolor">
                     <h1> UCVTS Lost and Found </h1>
 
@@ -46,7 +46,6 @@ export function Home() {
                     <h2>Getting started?</h2>
                     <p>[Youtube Video embed here]</p>
                 </div>
-            </body>
         </>
     )
 }
