@@ -63,8 +63,8 @@ export function SubmitLostItem() {
     return (
         <>
             {/* <head> <link href="filepond.css" rel="stylesheet" /></head> */}
-            <body className="containerBlue vertical">
-                <h1 className="text-white mb-4">Report a Lost Item</h1>
+            {/* <body className="containerBlue vertical"> */}
+                <h1 className="mb-4">Report a Lost Item</h1>
                 <form className="lostItemForm" onSubmit={handleSubmit}>
                     {/*<h1>Report a Lost Item</h1>*/}
                     {/*<h2>Details</h2>*/}
@@ -107,7 +107,7 @@ export function SubmitLostItem() {
                     </div>
                     <button type="submit" className="reportItem">Report Item</button>
                 </form>
-            </body> 
+            {/* </body> */}
         </>
     )
 }

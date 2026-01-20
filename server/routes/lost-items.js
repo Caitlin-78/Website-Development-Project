@@ -136,7 +136,7 @@ function verifyToken(req, res, next) {
 
     jwt.verify(token, process.env.SECRETKEY, (error, user) => {
         if (error) {
-            return res.status[403].json({message: "Invalid token."});
+            return res.json({message: "Invalid token."});
         }
 
         //req.body.user = user;
