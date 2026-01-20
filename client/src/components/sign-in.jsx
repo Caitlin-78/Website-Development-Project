@@ -28,18 +28,20 @@ export function SignIn() {
 
     return (
         <>
-            <h1>Sign In to Existing Account</h1>
-            <form onSubmit={handleSubmit}>
-                <div>   
-                    <label>Email Address: </label>
-                    <input name="emailAddress" onChange={(e) => setEmail(e.target.value)} required max={50}></input>
-                </div>
-                <div>
-                    <label>Password: </label>
-                    <input name="password" type="password" onChange={(e) => setPassword(e.target.value)} required max={30}></input>      
-                </div>
-                <button type="submit">Sign In</button>
-            </form>
+            <body>
+                <h1>Sign In to Existing Account</h1>
+                <form onSubmit={handleSubmit}>
+                    <div>   
+                        <label>Email Address: </label>
+                        <input name="emailAddress" onChange={(e) => setEmail(e.target.value)} required max={50}></input>
+                    </div>
+                    <div>
+                        <label>Password: </label>
+                        <input name="password" type="password" onChange={(e) => setPassword(e.target.value)} required max={30}></input>      
+                    </div>
+                    <button type="submit">Sign In</button>
+                </form>
+            </body>
         </>
     )
 }

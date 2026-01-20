@@ -13,6 +13,28 @@
   padding: 2em;
 }
 
+.containerBlue {
+  background-color: rgb(2, 2, 201);
+  width: 100vh;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.vertical {
+  flex-direction: column;
+}
+
+.container {
+  background-color: blue;
+  width: 100vh;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .read-the-docs {
   color: #888;
 }
@@ -57,6 +79,85 @@
   margin: 0;
   padding: 0;
   padding-block: 10px;
+}
+
+.blueBG {
+  background-color: rgb(0, 0, 107);
+}
+
+.tagsContent {
+  grid-area: tagsSelect;
+  display: flex;
+  justify-content: center;
+}
+
+.locationInfo {
+  grid-area: locationInfo;
+  display: flex;
+  justify-content: center;
+}
+
+.itemImage {
+  grid-area: image;
+}
+
+.itemName {
+  grid-area: name;
+}
+
+.description {
+  grid-area: description;
+}
+
+.generateText {
+  grid-area: generateText;
+}
+
+.buildingFound {
+  grid-area: foundIn;
+}
+
+.currentLocation {
+  grid-area: currentLocation;
+}
+
+.tags {
+  grid-area: tags;
+}
+ 
+.reportItem {
+  grid-area: submit;
+}
+
+.lostItemForm {
+  background-color: white;
+  border-radius: 10px;
+  width: 100%;
+  height: 80%;
+  padding: 3em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 3fr 1fr 1fr;
+  gap: 1em;
+  grid-template-areas:
+  "image name"
+  "image tags"
+  "image tagsSelect"
+  "image locationInfo"
+  "image description"
+  "image generateText"
+  "submit submit"
+}
+
+.form {
+  background-color: white;
+  border-radius: 10px;
+  width: 100%;
+  height: 80%;
+  padding: 3em;
+  gap: 3em;
+  display: flex;
+  flex-direction: column;
 }
 /*
 @theme inline {

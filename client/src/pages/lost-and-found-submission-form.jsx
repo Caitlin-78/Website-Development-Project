@@ -63,40 +63,51 @@ export function SubmitLostItem() {
     return (
         <>
             {/* <head> <link href="filepond.css" rel="stylesheet" /></head> */}
-            <h1 className = "barofcolor">Lost Item Submission Page</h1>
-            <form onSubmit={handleSubmit}>
-                <h2>Details</h2>
-                <div>
-                    <label>Item Image</label>
-                    <Input type="file" onChange={(e) => setImage(e.target.value)} name="itemImage" className="filepond" />
-                </div>
-                <div>
-                    <label>Item Name: </label>
-                    <Input name="itemName" onChange={(e) => setName(e.target.value)} maxLength={50} required/>
-                </div>
-                <div>
-                    <label>Description: </label>
-                    <textarea name="description" onChange={(e) => setDescription(e.target.value)} maxLength={250} required/>
-                </div>
-                <div>
-                    <label>Building Item was Found In: </label>
-                    <Input name="schoolFoundIn" onChange={(e) => setSchoolIn(e.target.value)} required/>
-                </div>
-                <div>
-                    <label>Current Building Item is In: </label>
-                    <Input name="currentLocation" onChange={(e) => setSchoolFound(e.target.value)} required/>
-                </div>
-                <h2>Tags</h2>
-                <div>
-                    <label>Item Type: </label>
-                    <Input name="itemType" onChange={(e) => setItemType(e.target.value)} />
-                    <label>Color: </label>
-                    <Input name="color" onChange={(e) => setColor(e.target.value)} />
-                    <label>Brand: </label>
-                    <Input name="brand" onChange={(e) => setBrand(e.target.value)} maxLength={25}/>
-                </div>
-                <button type="submit">Submit</button>
-            </form>
+            <body className="containerBlue vertical">
+                <h1 className="text-white mb-4">Report a Lost Item</h1>
+                <form className="lostItemForm" onSubmit={handleSubmit}>
+                    {/*<h1>Report a Lost Item</h1>*/}
+                    {/*<h2>Details</h2>*/}
+                    <div className="itemImage">
+                        {/* <label>Item Image</label> */}
+                        <Input type="file" onChange={(e) => setImage(e.target.value)} name="itemImage" className="filepond" />
+                    </div>
+                    <div className="itemName">
+                        <label>Item Name: </label>
+                        <Input name="itemName" onChange={(e) => setName(e.target.value)} maxLength={50} required/>
+                    </div>
+                    <div className="description">
+                        <textarea name="description" placeholder="Write a description" onChange={(e) => setDescription(e.target.value)} maxLength={250} required/>
+                    </div>
+                    <button className="generateText">Generate Description</button>
+                    <div className="locationInfo">
+                        <div className="buildingFound">
+                            <label>Building Item was Found In: </label>
+                            <Input name="schoolFoundIn" onChange={(e) => setSchoolIn(e.target.value)} required/>
+                        </div>
+                        <div className="currentLocation">
+                            <label>Current Building Item is In: </label>
+                            <Input name="currentLocation" onChange={(e) => setSchoolFound(e.target.value)} required/>
+                        </div>
+                    </div>
+                    <h2 className="tags"> Add Tags</h2>
+                    <div className="tagsContent">
+                        <div>
+                        <label>Item Type: </label>
+                        <Input name="itemType" onChange={(e) => setItemType(e.target.value)} />
+                        </div>
+                        <div>
+                        <label>Color: </label>
+                        <Input name="color" onChange={(e) => setColor(e.target.value)} />
+                        </div>
+                        <div>
+                        <label>Brand: </label>
+                        <Input name="brand" onChange={(e) => setBrand(e.target.value)} maxLength={25}/>
+                        </div>
+                    </div>
+                    <button type="submit" className="reportItem">Report Item</button>
+                </form>
+            </body> 
         </>
     )
 }

@@ -21,10 +21,9 @@ export function Home() {
 
     return (
         <>
-                <div className = "barofcolor">
+                <header className = "barofcolor">
                     <h1> UCVTS Lost and Found </h1>
-
-                </div>
+                </header>
                 <div>
                     <h2 style={{backgroundColor: '#11adc5', marginRight: '200px', marginLeft: '200px'}}>Recently Lost</h2>
                     <div className="homepageRecentlyLost">
