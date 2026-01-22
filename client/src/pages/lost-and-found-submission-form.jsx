@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { createNewItem } from "../api";
-import { Input } from "@/components/ui/input"
+import { Input } from "@/components/ui/input";
 import { jwtDecode } from "jwt-decode";
 //import ReactDOM from 'react-dom'
 
