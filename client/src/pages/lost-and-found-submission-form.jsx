@@ -4,6 +4,8 @@ import { Input } from "@/components/ui/input";
 import { jwtDecode } from "jwt-decode";
 //import ReactDOM from 'react-dom'
 
+import { imgPathEdit } from "@/imgPathEdit";
+
 import { FilePond, registerPlugin } from 'react-filepond';
 
 import 'filepond/dist/filepond.min.css';
@@ -22,7 +24,7 @@ export function SubmitLostItem() {
     */
     const [user, setUser] = useState({});
 
-    const [image, setImage] = useState("");
+    const [image, setImage] = useState("../public/goose.jpg");
     const [lostItemName, setName] = useState("");
     const [description, setDescription] = useState("");
     const [schoolFound, setSchoolFound] = useState("");
@@ -45,7 +47,7 @@ export function SubmitLostItem() {
         let submitObject = {
             itemName: lostItemName,
             description: description,
-            imgFileName: "",
+            imgFileName: image,
             dateUploaded: new Date(),
             itemType: type,
             color: itemColor,
@@ -56,7 +58,7 @@ export function SubmitLostItem() {
             claimedBy: null,
             adminApproved: false
         }
-
+        console.log(submitObject);
         await createNewItem(submitObject)
     }
 
@@ -70,11 +72,25 @@ export function SubmitLostItem() {
                     {/*<h2>Details</h2>*/}
                     <div className="itemImage">
                         {/* <label>Item Image</label> */}
-                        <Input type="file" onChange={(e) => setImage(e.target.value)} name="itemImage" className="filepond" />
+                        <label id="dropZone">
+                            <input type="file" id="imgInput" onChange={(e) => {
+                                if (e.target.value != "") {
+                                    //let img = imgPathEdit(e.target.value);
+                                    setImage(e.target.value);
+                                    console.log(image);
+                                } else {
+                                    console.log("Image not found :(");
+                                }
+                                //e.target.value != "" ? setImage(e.target.value) : setImage("../public/goose.jpg");
+                                /*image != "" ? console.log(image) : console.log("none")*/}} name="itemImage"/>
+\                        </label>
+                        <img src={image} id="preview"/>
                     </div>
                     <div className="itemName">
                         <label>Item Name: </label>
-                        <Input name="itemName" onChange={(e) => setName(e.target.value)} maxLength={50} required/>
+                        <Input name="itemName" onChange={(e) => {
+                            setName(e.target.value);
+                            console.log(lostItemName);}} maxLength={50} required/>
                     </div>
                     <div className="description">
                         <textarea name="description" placeholder="Write a description" onChange={(e) => setDescription(e.target.value)} maxLength={250} required/>

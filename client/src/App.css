@@ -149,6 +149,12 @@
   "submit submit"
 }
 
+#dropZone {
+  border-radius: 10px;
+  border-color: #001524;
+  border-width: 1px;
+}
+
 .form {
   background-color: white;
   border-radius: 10px;
