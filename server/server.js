@@ -14,10 +14,14 @@ app.use(express.json());
 const indexRouter = require('./routes/index');
 const lostItemsRouter = require('./routes/lost-items');
 const userRouter = require('./routes/users');
+const { createRouteHandler } = require('uploadthing/express');
+const { uploadRouter } = require('./routes/image-router');
 
 app.use('/', indexRouter);
 app.use('/lost-items', lostItemsRouter);
 app.use('/user', userRouter);
+app.use('/api/uploadthing', createRouteHandler({router: uploadRouter}))
+
 
 /* alternate way of connecting to MongoDB (do this only if absolutely needed)
 const mongoose = require("mongoose");

@@ -3,10 +3,12 @@ import { createNewItem } from "../api";
 import { Input } from "@/components/ui/input";
 import { jwtDecode } from "jwt-decode";
 //import ReactDOM from 'react-dom'
+import { generateUploadDropzone } from "@uploadthing/react";
+const UploadDropzone = generateUploadDropzone("http:/localhost:8080/api/uploadthing");
 
-import { imgPathEdit } from "@/imgPathEdit";
+//import { imgPathEdit } from "@/imgPathEdit";
 
-import { FilePond, registerPlugin } from 'react-filepond';
+/*import { FilePond, registerPlugin } from 'react-filepond';
 
 import 'filepond/dist/filepond.min.css';
 
@@ -15,6 +17,7 @@ import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
+*/
 
 export function SubmitLostItem() {
     /*
@@ -71,20 +74,7 @@ export function SubmitLostItem() {
                     {/*<h1>Report a Lost Item</h1>*/}
                     {/*<h2>Details</h2>*/}
                     <div className="itemImage">
-                        {/* <label>Item Image</label> */}
-                        <label id="dropZone">
-                            <input type="file" id="imgInput" onChange={(e) => {
-                                if (e.target.value != "") {
-                                    //let img = imgPathEdit(e.target.value);
-                                    setImage(e.target.value);
-                                    console.log(image);
-                                } else {
-                                    console.log("Image not found :(");
-                                }
-                                //e.target.value != "" ? setImage(e.target.value) : setImage("../public/goose.jpg");
-                                /*image != "" ? console.log(image) : console.log("none")*/}} name="itemImage"/>
-\                        </label>
-                        <img src={image} id="preview"/>
+                        <UploadDropzone/>
                     </div>
                     <div className="itemName">
                         <label>Item Name: </label>
